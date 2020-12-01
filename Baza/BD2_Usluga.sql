@@ -16,31 +16,31 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `Klient`
+-- Table structure for table `Usluga`
 --
 
-DROP TABLE IF EXISTS `Klient`;
+DROP TABLE IF EXISTS `Usluga`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `Klient` (
-  `Id_klienta` int NOT NULL AUTO_INCREMENT,
-  `Imie_klienta` varchar(30) NOT NULL,
-  `Nazwisko_klienta` varchar(30) NOT NULL,
-  `nrPesel_klienta` varchar(11) NOT NULL,
-  PRIMARY KEY (`Id_klienta`),
-  UNIQUE KEY `Id_klienta` (`Id_klienta`),
-  CONSTRAINT `Klient_chk_1` CHECK ((char_length(`nrPesel_klienta`) = 11))
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `Usluga` (
+  `Id_uslugi` int NOT NULL AUTO_INCREMENT,
+  `Nazwa_uslugi` varchar(30) NOT NULL,
+  `Opis_uslugi` varchar(255) NOT NULL,
+  `Cena_uslugi` int NOT NULL,
+  PRIMARY KEY (`Id_uslugi`),
+  UNIQUE KEY `Id_uslugi` (`Id_uslugi`),
+  CONSTRAINT `Usluga_chk_1` CHECK ((`Cena_uslugi` > 0))
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `Klient`
+-- Dumping data for table `Usluga`
 --
 
-LOCK TABLES `Klient` WRITE;
-/*!40000 ALTER TABLE `Klient` DISABLE KEYS */;
-INSERT INTO `Klient` VALUES (1,'Stefan','Misiowski','92031578901'),(2,'Janusz','Kowalczyk','76021378221'),(3,'Irena','Szara','89021207712'),(4,'Monika','Oliwczak','97013044128'),(5,'Bronislaw','Staszewski','59071288547');
-/*!40000 ALTER TABLE `Klient` ENABLE KEYS */;
+LOCK TABLES `Usluga` WRITE;
+/*!40000 ALTER TABLE `Usluga` DISABLE KEYS */;
+INSERT INTO `Usluga` VALUES (1,'Przeglad samochodu','Firmowy mechanik dokonuje przegladu samochodu',300),(2,'Dodatkowy komplet kluczy','Dostarczamy dodatkowy komplet kluczy do zakupionego pojazdu',500),(3,'Opony letnie','Dostarczamy dodatkowy komplet letnich opon do auta',450),(4,'Opony zimowe','Dostarczamy dodatkowy komplet zimowych opon do auta',550),(5,'Bagaznik dachowy','W zakupionym aucie montujemy bagaznik dachowy',890),(6,'Hak holowniczy','W zakupionym aucie montujemy hak holowniczy',950),(7,'Dostawa samochodu','Dostarczymy samochod pod wybrany adres',350);
+/*!40000 ALTER TABLE `Usluga` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -52,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-12-01 21:04:26
+-- Dump completed on 2020-12-01 21:25:05

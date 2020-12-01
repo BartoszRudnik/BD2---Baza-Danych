@@ -16,30 +16,30 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `Oferta_Usluga`
+-- Table structure for table `Umowa`
 --
 
-DROP TABLE IF EXISTS `Oferta_Usluga`;
+DROP TABLE IF EXISTS `Umowa`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `Oferta_Usluga` (
-  `OfertaId_oferty` int NOT NULL,
-  `UslugaId_uslugi` int NOT NULL,
-  PRIMARY KEY (`OfertaId_oferty`,`UslugaId_uslugi`),
-  KEY `FKOferta_Usl41875` (`UslugaId_uslugi`),
-  CONSTRAINT `FKOferta_Usl28142` FOREIGN KEY (`OfertaId_oferty`) REFERENCES `Oferta` (`Id_oferty`),
-  CONSTRAINT `FKOferta_Usl41875` FOREIGN KEY (`UslugaId_uslugi`) REFERENCES `Usluga` (`Id_uslugi`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `Umowa` (
+  `Id_umowy` int NOT NULL AUTO_INCREMENT,
+  `Rodzaj_umowy` varchar(40) NOT NULL,
+  `Opis_umowy` varchar(255) NOT NULL,
+  PRIMARY KEY (`Id_umowy`),
+  UNIQUE KEY `Id_umowy` (`Id_umowy`),
+  CONSTRAINT `Umowa_chk_1` CHECK ((`Rodzaj_umowy` in (_utf8mb4'kupno',_utf8mb4'leasing',_utf8mb4'wypozyczenie')))
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `Oferta_Usluga`
+-- Dumping data for table `Umowa`
 --
 
-LOCK TABLES `Oferta_Usluga` WRITE;
-/*!40000 ALTER TABLE `Oferta_Usluga` DISABLE KEYS */;
-INSERT INTO `Oferta_Usluga` VALUES (8,1),(9,2),(10,3),(11,4),(12,5),(13,6);
-/*!40000 ALTER TABLE `Oferta_Usluga` ENABLE KEYS */;
+LOCK TABLES `Umowa` WRITE;
+/*!40000 ALTER TABLE `Umowa` DISABLE KEYS */;
+INSERT INTO `Umowa` VALUES (1,'kupno','opis umowy kupna'),(2,'leasing','opis umowy leasingowej'),(3,'wypozyczenie','opis umowy wypozyczenia');
+/*!40000 ALTER TABLE `Umowa` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -51,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-12-01 21:04:26
+-- Dump completed on 2020-12-01 21:25:07

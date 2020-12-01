@@ -32,8 +32,8 @@ CREATE TABLE `Samochod` (
   `Liczba_miejsc_samochodu` int NOT NULL,
   `Rok_produkcji_samochodu` int NOT NULL,
   `Kolor_samochodu` varchar(30) NOT NULL,
-  `Rodzaj_paliwa_samochodu` varchar(30) DEFAULT NULL,
-  `Rodzaj_skrzyni_biegow_samochodu` varchar(15) DEFAULT NULL,
+  `Rodzaj_paliwa_samochodu` varchar(30) NOT NULL,
+  `Rodzaj_skrzyni_biegow_samochodu` varchar(15) NOT NULL,
   PRIMARY KEY (`Id_samochodu`),
   UNIQUE KEY `Id_samochodu` (`Id_samochodu`),
   CONSTRAINT `Samochod_chk_1` CHECK ((`Liczba_koni_mechanicznych_samochodu` >= 0)),
@@ -64,4 +64,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-12-01 21:04:26
+-- Dump completed on 2020-12-01 21:25:07

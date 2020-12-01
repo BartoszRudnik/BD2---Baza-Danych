@@ -16,30 +16,31 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `Umowa`
+-- Table structure for table `Klient`
 --
 
-DROP TABLE IF EXISTS `Umowa`;
+DROP TABLE IF EXISTS `Klient`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `Umowa` (
-  `Id_umowy` int NOT NULL AUTO_INCREMENT,
-  `Rodzaj_umowy` varchar(40) NOT NULL,
-  `Opis_umowy` varchar(255) NOT NULL,
-  PRIMARY KEY (`Id_umowy`),
-  UNIQUE KEY `Id_umowy` (`Id_umowy`),
-  CONSTRAINT `Umowa_chk_1` CHECK ((`Rodzaj_umowy` in (_utf8mb4'kupno',_utf8mb4'leasing',_utf8mb4'wypozyczenie')))
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `Klient` (
+  `Id_klienta` int NOT NULL AUTO_INCREMENT,
+  `Imie_klienta` varchar(30) NOT NULL,
+  `Nazwisko_klienta` varchar(30) NOT NULL,
+  `nrPesel_klienta` varchar(11) NOT NULL,
+  PRIMARY KEY (`Id_klienta`),
+  UNIQUE KEY `Id_klienta` (`Id_klienta`),
+  CONSTRAINT `Klient_chk_1` CHECK ((char_length(`nrPesel_klienta`) = 11))
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `Umowa`
+-- Dumping data for table `Klient`
 --
 
-LOCK TABLES `Umowa` WRITE;
-/*!40000 ALTER TABLE `Umowa` DISABLE KEYS */;
-INSERT INTO `Umowa` VALUES (1,'kupno','opis umowy kupna'),(2,'leasing','opis umowy leasingowej'),(3,'wypozyczenie','opis umowy wypozyczenia');
-/*!40000 ALTER TABLE `Umowa` ENABLE KEYS */;
+LOCK TABLES `Klient` WRITE;
+/*!40000 ALTER TABLE `Klient` DISABLE KEYS */;
+INSERT INTO `Klient` VALUES (1,'Stefan','Misiowski','92031578901'),(2,'Janusz','Kowalczyk','76021378221'),(3,'Irena','Szara','89021207712'),(4,'Monika','Oliwczak','97013044128'),(5,'Bronislaw','Staszewski','59071288547');
+/*!40000 ALTER TABLE `Klient` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -51,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-12-01 21:04:26
+-- Dump completed on 2020-12-01 21:25:07
