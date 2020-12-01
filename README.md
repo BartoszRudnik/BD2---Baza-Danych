@@ -1,1 +1,1 @@
-# BD2---Baza-Danych
+# BD2-BazaDanych
