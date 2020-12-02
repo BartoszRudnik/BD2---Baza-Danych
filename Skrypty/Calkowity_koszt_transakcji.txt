@@ -1,0 +1,11 @@
+Select Klient.Id_klienta, Klient.Imie_klienta, Klient.Nazwisko_klienta, Oferta.Cena_oferty, Usluga.Nazwa_uslugi, Usluga.Cena_uslugi, Umowa.Rodzaj_umowy, Rezerwacja.Data_Rezerwacji, Rezerwacja.Data_Zakonczenia,
+CASE WHEN Umowa.Id_umowy = 1 THEN (Oferta.Cena_oferty + Usluga.Cena_uslugi) 
+	 WHEN Umowa.Id_umowy = 2 THEN IF(TIMESTAMPDIFF(MONTH,Rezerwacja.Data_Rezerwacji, Rezerwacja.Data_Zakonczenia) = 0, Oferta.Cena_oferty + Usluga.Cena_Uslugi, TIMESTAMPDIFF(MONTH,Rezerwacja.Data_Rezerwacji, Rezerwacja.Data_Zakonczenia) * Oferta.Cena_oferty + Usluga.Cena_Uslugi) 
+     ELSE ((DATEDIFF(Rezerwacja.Data_Zakonczenia, Rezerwacja.Data_Rezerwacji) * Oferta.Cena_oferty) + Usluga.Cena_uslugi)
+     END AS Calkowity_koszt     
+FROM Klient
+JOIN Rezerwacja ON Klient.Id_klienta = Rezerwacja.KlientId_klienta
+JOIN Oferta_Usluga ON Rezerwacja.Oferta_UslugaOfertaId_oferty = Oferta_Usluga.OfertaId_oferty
+JOIN Oferta ON Oferta.Id_oferty = Oferta_Usluga.OfertaId_oferty
+JOIN Umowa ON Oferta.UmowaId_umowy = Umowa.Id_umowy
+JOIN Usluga ON Oferta_Usluga.UslugaId_uslugi = Usluga.Id_uslugi;

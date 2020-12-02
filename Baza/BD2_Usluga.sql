@@ -29,8 +29,8 @@ CREATE TABLE `Usluga` (
   `Cena_uslugi` int NOT NULL,
   PRIMARY KEY (`Id_uslugi`),
   UNIQUE KEY `Id_uslugi` (`Id_uslugi`),
-  CONSTRAINT `Usluga_chk_1` CHECK ((`Cena_uslugi` > 0))
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `uslua_chk_1` CHECK ((`Cena_uslugi` >= 0))
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +39,7 @@ CREATE TABLE `Usluga` (
 
 LOCK TABLES `Usluga` WRITE;
 /*!40000 ALTER TABLE `Usluga` DISABLE KEYS */;
-INSERT INTO `Usluga` VALUES (1,'Przeglad samochodu','Firmowy mechanik dokonuje przegladu samochodu',300),(2,'Dodatkowy komplet kluczy','Dostarczamy dodatkowy komplet kluczy do zakupionego pojazdu',500),(3,'Opony letnie','Dostarczamy dodatkowy komplet letnich opon do auta',450),(4,'Opony zimowe','Dostarczamy dodatkowy komplet zimowych opon do auta',550),(5,'Bagaznik dachowy','W zakupionym aucie montujemy bagaznik dachowy',890),(6,'Hak holowniczy','W zakupionym aucie montujemy hak holowniczy',950),(7,'Dostawa samochodu','Dostarczymy samochod pod wybrany adres',350);
+INSERT INTO `Usluga` VALUES (1,'Przeglad samochodu','Firmowy mechanik dokonuje przegladu samochodu',300),(2,'Dodatkowy komplet kluczy','Dostarczamy dodatkowy komplet kluczy do zakupionego pojazdu',500),(3,'Opony letnie','Dostarczamy dodatkowy komplet letnich opon do auta',450),(4,'Opony zimowe','Dostarczamy dodatkowy komplet zimowych opon do auta',550),(5,'Bagaznik dachowy','W zakupionym aucie montujemy bagaznik dachowy',890),(6,'Hak holowniczy','W zakupionym aucie montujemy hak holowniczy',950),(7,'Dostawa samochodu','Dostarczymy samochod pod wybrany adres',350),(8,'Brak','Brak wykupionej dodatkowej uslugi',0);
 /*!40000 ALTER TABLE `Usluga` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-12-01 23:41:45
+-- Dump completed on 2020-12-02 12:40:10
