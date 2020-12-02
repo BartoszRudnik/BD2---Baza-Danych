@@ -1,5 +1,5 @@
-Select Klient.Id_klienta, Klient.Imie_klienta, Klient.Nazwisko_klienta, Oferta.Cena_oferty, Usluga.Nazwa_uslugi, Usluga.Cena_uslugi, Umowa.Rodzaj_umowy, Rezerwacja.Data_Rezerwacji, Rezerwacja.Data_Zakonczenia, Pracownik.Id_Pracownika, Promocja.Wysokosc_promocji,
-CASE WHEN Umowa.Id_umowy = 1 THEN (Oferta.Cena_oferty + Usluga.Cena_uslugi - (Oferta.Cena_oferty * (Promocja.Wysokosc_promocji / 100))) 
+SELECT Pracownik.Id_Pracownika, Pracownik.Imie_Pracownika, Pracownik.Nazwisko_Pracownika,
+	SUM(CASE WHEN Umowa.Id_umowy = 1 THEN (Oferta.Cena_oferty + Usluga.Cena_uslugi - (Oferta.Cena_oferty * (Promocja.Wysokosc_promocji / 100))) 
 	 WHEN Umowa.Id_umowy = 2 THEN (CEILING(TIMESTAMPDIFF(MONTH, Rezerwacja.Data_Rezerwacji, Rezerwacja.Data_Zakonczenia) +
 												  DATEDIFF(
 													Rezerwacja.Data_Zakonczenia,
@@ -16,12 +16,13 @@ CASE WHEN Umowa.Id_umowy = 1 THEN (Oferta.Cena_oferty + Usluga.Cena_uslugi - (Of
 													MONTH
 												  )) * Oferta.Cena_oferty + Usluga.Cena_uslugi - (Oferta.Cena_oferty * (Promocja.Wysokosc_promocji / 100)))
      ELSE ((DATEDIFF(Rezerwacja.Data_Zakonczenia, Rezerwacja.Data_Rezerwacji) * Oferta.Cena_oferty) + Usluga.Cena_uslugi - (Oferta.Cena_oferty * (Promocja.Wysokosc_promocji / 100)))
-     END AS Calkowity_koszt     
-FROM Klient
-JOIN Rezerwacja ON Klient.Id_klienta = Rezerwacja.KlientId_klienta
-JOIN Oferta_Usluga ON Rezerwacja.Oferta_UslugaOfertaId_oferty = Oferta_Usluga.OfertaId_oferty
-JOIN Oferta ON Oferta.Id_oferty = Oferta_Usluga.OfertaId_oferty
+     END) AS Wygenerowany_Zysk
+FROM Pracownik
+JOIN Oferta ON Pracownik.Id_Pracownika = Oferta.PracownikId_Pracownika
 JOIN Umowa ON Oferta.UmowaId_umowy = Umowa.Id_umowy
-JOIN Usluga ON Oferta_Usluga.UslugaId_uslugi = Usluga.Id_uslugi
-JOIN Pracownik ON Oferta.PracownikId_Pracownika = Pracownik.Id_Pracownika
-JOIN Promocja ON Promocja.Id_promocji = Oferta.PromocjaId_promocji;
+JOIN Oferta_Usluga ON Oferta.Id_oferty = Oferta_Usluga.OfertaId_oferty
+JOIN Usluga ON Usluga.Id_uslugi = Oferta_Usluga.UslugaId_uslugi
+JOIN Rezerwacja ON Rezerwacja.Oferta_UslugaOfertaId_oferty = Oferta_Usluga.OfertaId_oferty
+JOIN Promocja ON Oferta.PromocjaId_promocji = Promocja.Id_promocji
+GROUP BY Pracownik.Id_Pracownika
+ORDER BY Wygenerowany_Zysk DESC;
