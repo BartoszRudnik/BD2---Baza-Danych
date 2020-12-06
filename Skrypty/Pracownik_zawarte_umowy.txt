@@ -1,0 +1,12 @@
+CREATE VIEW Pracownik_zawarte_umowy AS
+SELECT  A.Id_Pracownika, A.Imie_Pracownika, A.Nazwisko_Pracownika,
+	   (SELECT count(Oferta.Id_oferty) FROM Oferta
+        WHERE Oferta.UmowaId_umowy = 1 AND A.Id_Pracownika = Oferta.PracownikId_Pracownika) AS Liczba_zawartych_umow_kupna,
+        (SELECT count(Oferta.Id_oferty) FROM Oferta
+        WHERE Oferta.UmowaId_umowy = 2 AND A.Id_Pracownika = Oferta.PracownikId_Pracownika) AS Liczba_zawartych_umow_leasingu,
+        (SELECT count(Oferta.Id_oferty) FROM Oferta
+        WHERE Oferta.UmowaId_umowy = 3 AND A.Id_Pracownika = Oferta.PracownikId_Pracownika) AS Liczba_zawartych_umow_wypozyczenia,
+        (SELECT count(Oferta.Id_oferty) FROM Oferta
+        WHERE A.Id_Pracownika = Oferta.PracownikId_Pracownika) AS Laczna_liczba_zawartych_umow
+        FROM Pracownik A;
+        
