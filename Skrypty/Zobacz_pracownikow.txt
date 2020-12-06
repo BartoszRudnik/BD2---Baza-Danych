@@ -1,0 +1,14 @@
+CREATE 
+    ALGORITHM = UNDEFINED 
+    DEFINER = `root`@`localhost` 
+    SQL SECURITY DEFINER
+VIEW `szczegoly_pracownik` AS
+    SELECT 
+        `Pracownik`.`Imie_Pracownika` AS `Imie_Pracownika`,
+        `Pracownik`.`Nazwisko_Pracownika` AS `Nazwisko_Pracownika`,
+        `Uprawnienie`.`nazwa_uprawnienia` AS `nazwa_uprawnienia`,
+        (TO_DAYS(CURDATE()) - TO_DAYS(`Pracownik`.`Data_zatrudnienia_pracownika`)) AS `Staz pracy [dni]`,
+        `Pracownik`.`Pensja_pracownika` AS `Pensja_pracownika`
+    FROM
+        (`Pracownik`
+        JOIN `Uprawnienie` ON ((`Pracownik`.`UprawnieniaId_uprawnienia` = `Uprawnienie`.`Id_uprawnienia`)))

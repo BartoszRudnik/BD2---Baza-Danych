@@ -1,0 +1,11 @@
+CREATE VIEW `Liczba_sztuk_danego_samochodu` AS
+    SELECT 
+        `Samochod`.`Id_samochodu` AS `Id_samochodu`,
+        `Samochod`.`Marka_samochodu` AS `Marka_samochodu`,
+        `Samochod`.`Model_samochodu` AS `Model_samochodu`,
+        SUM(`Oferta`.`Ilosc_dostepnych_ofert`) AS `Łączna liczba sztuk pojazdu`
+    FROM
+        (`Samochod`
+        JOIN `Oferta` ON ((`Samochod`.`Id_samochodu` = `Oferta`.`SamochodId_samochodu`)))
+    GROUP BY `Samochod`.`Id_samochodu`
+    ORDER BY `Samochod`.`Id_samochodu`

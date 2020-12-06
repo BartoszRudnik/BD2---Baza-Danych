@@ -1,0 +1,16 @@
+CREATE VIEW `szczegoly_oferty` AS
+    SELECT 
+        `Samochod`.`Marka_samochodu` AS `Marka_samochodu`,
+        `Samochod`.`Model_samochodu` AS `Model_samochodu`,
+        `Oferta`.`Cena_oferty` AS `Cena_oferty`,
+        (CASE
+            WHEN (`Umowa`.`Id_umowy` = 1) THEN 'cena calkowita'
+            WHEN (`Umowa`.`Id_umowy` = 2) THEN 'cena za miesiac'
+            WHEN (`Umowa`.`Id_umowy` = 3) THEN 'cena za dzien'
+        END) AS `Szczegoly_platnosci`,
+        `Umowa`.`Rodzaj_umowy` AS `Rodzaj_umowy`,
+        `Oferta`.`Ilosc_dostepnych_ofert` AS `Ilosc_dostepnych_ofert`
+    FROM
+        ((`Oferta`
+        JOIN `Umowa` ON ((`Oferta`.`UmowaId_umowy` = `Umowa`.`Id_umowy`)))
+        JOIN `Samochod` ON ((`Oferta`.`SamochodId_samochodu` = `Samochod`.`Id_samochodu`)))
